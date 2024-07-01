@@ -53,7 +53,7 @@ The last chart diplays the future predictions. Through testing I noticed the mod
 - Batch Inputs (make sure to add batch normlization to StockPredictionLSTM class), declare batch_size when calling main:
 `main("META",lookback=60,lookforward=20,batch_size=1,num_epochs=20)`
 - Expandable Features. Called within StockDataset.init, you can add more features to norm_data such as `norm_data = np.hstack((norm_close_prices, rsi, norm_volumes))`. Make sure the first index of each array is the predicted close price. Also the new features should all be normalized using a unique MinMaxScaler. Although if the feature is already a value between 0 and 1 such as rsi values, it does not need to be further normalized. A caveat to this is if there is only one feature then use `self.data  = {feature}` such as `self.data = norm_data`. The rest of the code should work as intended and should not have to be changed to account new features or removal of features. 
-- Extensive Data Output
+- Extensive Data Collection + Output
 - GPU Support 
 
 ## Model
