@@ -61,6 +61,7 @@ The last chart diplays the future predictions. Through testing I noticed the mod
 Stocks are a time-series dataset, so using a RNN is a logical choice. LSTMs does not suffer from a regular RNN's vanishing gradient problem, and is often better at handling sequential data than RNNs.
 
 The model consists of 2 LSTM layers, followers by 1 fc layer
+
 ![model](https://github.com/johnsony0/Pytorch-Stock-Predictor/assets/76934261/508f589a-7ee9-44ad-87e4-a364d0eb346f)
 
 ## Future Work
