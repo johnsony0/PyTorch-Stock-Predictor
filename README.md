@@ -69,11 +69,11 @@ The input should be of size (batch_size, sequence_length, features_size) and the
 
 ## Future Work
 
-- Improve model
+- Improve model (better predictor of value rather than just direction)
 - Custom LSTM
 - Output dates in the future predictions array
-- Better predictor of value
 - Allow for index funds & etfs as inputs
+- Implement into website
 
 ## Contributing
 
