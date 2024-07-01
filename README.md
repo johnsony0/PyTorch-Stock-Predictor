@@ -24,7 +24,7 @@ The training set is the first 80% of the data. Training loop uses tqdm to approx
 
 ![Training_Loop](https://github.com/johnsony0/Pytorch-Stock-Predictor/assets/76934261/9708d928-760c-4ad9-80fc-328e67c52b40)
 
-Then it plots the training loss over epochs and directions percentage over epochs as well. 
+Then it plots the training loss over epochs and directions percentage over epochs.
 
 ![Training_Graphs](https://github.com/johnsony0/Pytorch-Stock-Predictor/assets/76934261/a661f4ea-fb9e-46ae-972e-7708601dd2b1)
 
@@ -40,7 +40,7 @@ Our first chart displays the entire history of the stock that we have data on, a
 
 ![Predicted_Vs_Actual](https://github.com/johnsony0/Pytorch-Stock-Predictor/assets/76934261/f16f33ca-c6bf-4939-bfcf-c5d3222cf42b)
 
-Our next chart displays the first chart but zoomed in specifically on the region that we predict. A quick analysis shows that in the beginning of 2023 the model consistently predicts the stock should be lower than it actually is (the predicted is under the Actual line), meaning the model thinks the stock is overvalued and should drop. Later from mid 2023 to 2024, the model thinks the stock is undervalued and consistently predicts a value > than the actual value. Currently in mid 2024, it once again predicts the stock to fall, as with each input it always outputs a lower value. 
+Our next chart displays the first chart but zoomed in specifically on the region that we predict. A quick analysis shows that in the beginning of 2023 the model consistently predicts the stock should be lower than it actually is (the Predicted is under the Actual line), meaning the model thinks the stock is overvalued and should drop. Later from mid 2023 to 2024, the model thinks the stock is undervalued and consistently predicts a value > than the actual value. Currently in mid 2024, it once again predicts the stock to fall, as with each input it always outputs a lower value. 
 
 ![ZoomedIn_Predicted_Vs_Actual](https://github.com/johnsony0/Pytorch-Stock-Predictor/assets/76934261/42bb0c9b-2e5d-41f6-a226-c3baa0da0bfd)
 
@@ -50,13 +50,24 @@ The last chart diplays the future predictions. Through testing I noticed the mod
 
 ## Features
 
+- Batch Inputs (make sure to add batch normlization to StockPredictionLSTM class), declare batch_size when calling main:
+`main("META",lookback=60,lookforward=20,batch_size=1,num_epochs=20)`
+- Expandable Features. Called within StockDataset.init, you can add more features to norm_data such as `norm_data = np.hstack((norm_close_prices, rsi, norm_volumes))`. Make sure the first index of each array is the predicted close price. Also the new features should all be normalized using a unique MinMaxScaler. Although if the feature is already a value between 0 and 1 such as rsi values, it does not need to be further normalized. A caveat to this is if there is only one feature then use `self.data  = {feature}` such as `self.data = norm_data`. The rest of the code should work as intended and should not have to be changed to account new features or removal of features. 
+- Extensive Data Output
+- GPU Support 
+
 ## Model
 
+Stocks are a time-series dataset, so using a RNN is a logical choice. LSTMs does not suffer from a regular RNN's vanishing gradient problem, and is often better at handling sequential data than RNNs.
+
+The model consists of 2 LSTM layers, followers by 1 fc layer
 ![model](https://github.com/johnsony0/Pytorch-Stock-Predictor/assets/76934261/508f589a-7ee9-44ad-87e4-a364d0eb346f)
 
 ## Future Work
 
 - Improve model
+- Custom LSTM
+- Output dates in the future predictions array
 - Better predictor of value
 - GPU processing capabilities
 
