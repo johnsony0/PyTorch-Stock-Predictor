@@ -48,6 +48,8 @@ The last chart diplays the future predictions. Through testing I noticed the mod
 
 ![Future_Predictions](https://github.com/johnsony0/Pytorch-Stock-Predictor/assets/76934261/1e61ca7d-e6d1-42e7-abc5-46d586d7b4f5)
 
+Training and testing of this specific example occured on 6/30/2024.
+
 ## Features
 
 - Works with any stock ticker (better on stocks with more data) 
