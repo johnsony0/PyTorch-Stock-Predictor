@@ -14,9 +14,25 @@ If you wish to use a different API such as vantage alpha or yahoo finance, you w
 
 ### Running
 
-This project was created using google colab, however it should be able to run on any IDE as well (such as VSCode) as long as your device supports python. If not using google colab, make sure to download all dependent libraries.
+This project was developed using Google Colab but can also be executed in any IDE that supports Python, such as VSCode. Ensure all necessary libraries are installed if you are not using Google Colab.
 
-To start, import all libraries, run all functions, then call `main(ticker,lookback=15,lookforward=5,batch_size=1,num_epochs=5)` with required ticker input, and the rest are optional. Such an input can look like `main("AMZN",lookback=60,lookforward=20,batch_size=1,num_epochs=20)`.
+To run the project:
+
+Import all required libraries.
+Run all function definitions.
+Call the main(...) function with the appropriate parameters.
+Example usage:
+
+```python
+main("AMZN", lookback=60, lookforward=20, batch_size=1, num_epochs=20)
+```
+
+Parameters:
+- ticker: The stock symbol to predict. (string, default=None)
+- lookback: The number of past days to consider for predictions. (int, default=60)
+- lookforward: The number of future days to predict. (int, default=20)
+- batch_size: The batch size for training and testing. (int, default=1)
+- num_epochs: The number of training epochs. (int, default=20)
 
 ### Training
 
@@ -32,7 +48,7 @@ Then it plots the training loss over epochs and directions percentage over epoch
 
 Generally the model works much better with more data. Alpaca historical stock data only has about 7 years of data, so using stocks that have >7 years of data is preferred, such stocks include 'IBM', 'NVDA', 'AMZN' while more recent stocks like 'RDDT' will not yield good results. 
 
-When testing the model, we test it on the last 20% of the dataset. The normalized loss is calculated using MSE and the unnormalize loss is calcualted with manhatten distance. Since our y axis is aligned it is just the abs(label-predicted).
+When testing the model, we test it on the last 20% of the dataset. The normalized loss is calculated using MSE and the unnormalize loss is calcualted with manhatten distance. Since our x axis is aligned it is just the abs(label-predicted).
 
 ![Test_Loop](https://github.com/johnsony0/Pytorch-Stock-Predictor/assets/76934261/d649c5de-2580-4caa-aa9d-8d78515df14b)
 
@@ -53,12 +69,12 @@ Training and testing of this specific example occured on 6/30/2024.
 ## Features
 
 - Works with any stock ticker (better on stocks with more data) 
-- Batch Inputs (make sure to add batch normlization to StockPredictionLSTM class), declare batch_size when calling main:
-`main("META",lookback=60,lookforward=20,batch_size=1,num_epochs=20)`
+- Batch Inputs (make sure to add batch normlization to StockPredictionLSTM class), declare batch_size when calling main
 - Expandable Features. Called within StockDataset.init, you can add more features to norm_data such as `norm_data = np.hstack((norm_close_prices, rsi, norm_volumes))`. Make sure the first index of each array is the close price. Also the new features should all be normalized using a unique MinMaxScaler. Although if the feature is already a value between 0 and 1 such as rsi values, it does not need to be further normalized. A caveat to this is if there is only one feature then use `self.data  = {feature}` such as `self.data = norm_data`. The rest of the code should work as intended and should not have to be changed to account new features or removal of features. 
 - Saves model if it is new, otherwise loads model if it can find it from a given path
 - Extensive Data Collection + Output
-- GPU Support 
+- GPU Support
+- Modularized, with main() containing the pipleine
 
 ## Model
 
