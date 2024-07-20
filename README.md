@@ -76,7 +76,15 @@ Training and testing of this specific example occured on 6/30/2024.
 - GPU Support
 - Modularized, with main() containing the pipleine
 
-## Model
+## Pipeline
+
+This project was crafted with modularization and pipeline in mind with each function designed for a specific part of the pipeline.
+
+For instance if you wanted to modify how data is collected, you would update ```class StockDataset()```
+
+![pipeline](https://github.com/user-attachments/assets/44aa2b3f-42c1-4908-9c08-2faea1bc94be)
+
+### Model
 
 Stocks are a time-series dataset, so using a RNN is a logical choice. LSTMs does not suffer from a regular RNN's vanishing gradient problem, and is often better at handling sequential data than RNNs.
 
