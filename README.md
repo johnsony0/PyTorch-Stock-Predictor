@@ -78,7 +78,7 @@ Training and testing of this specific example occured on 6/30/2024.
 
 ## Pipeline
 
-This project was crafted with modularization and pipeline in mind with each function designed for a specific part of the pipeline.
+This project offers a modularized and pipelined approach to financial data analysis and prediction, ensuring flexibility, scalability, and ease of maintenance. The project is organized into distinct modules that handle different stages of the pipeline.
 
 For instance if you wanted to modify how data is collected, you would update ```class StockDataset()```
 
